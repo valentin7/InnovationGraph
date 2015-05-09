@@ -58,12 +58,12 @@
           if (node.data.alpha===0) return
           if (node.data.shape=='dot'){
             gfx.oval(pt.x-w/2, pt.y-w/2, w, w, {fill:node.data.color, alpha:node.data.alpha})
-            gfx.text(node.name, pt.x, pt.y+7, {color:"white", align:"center", font:"Arial", size:12})
-            gfx.text(node.name, pt.x, pt.y+7, {color:"white", align:"center", font:"Arial", size:12})
+            gfx.text(node.name, pt.x, pt.y+7, {color:"white", align:"center", font:"Helvetica", size:12})
+            gfx.text(node.name, pt.x, pt.y+7, {color:"white", align:"center", font:"Helvetica", size:12})
           }else{
             gfx.rect(pt.x-w/2, pt.y-8, w, 20, 4, {fill:node.data.color, alpha:node.data.alpha})
-            gfx.text(node.name, pt.x, pt.y+9, {color:"white", align:"center", font:"Arial", size:12})
-            gfx.text(node.name, pt.x, pt.y+9, {color:"white", align:"center", font:"Arial", size:12})
+            gfx.text(node.name, pt.x, pt.y+9, {color:"white", align:"center", font:"Helvetica", size:12})
+            gfx.text(node.name, pt.x, pt.y+9, {color:"white", align:"center", font:"Helvetica", size:12})
           }
         })
         that._drawVignette()
@@ -149,24 +149,25 @@
 
             if (!nearest.node) return false
 
-            if (nearest.node.data.shape!='dot'){
-              selected = (nearest.distance < 50) ? nearest : null
-              if (selected){
-                 dom.addClass('linkable')
-                 window.status = selected.node.data.link.replace(/^\//,"http://"+window.location.host+"/").replace(/^#/,'')
-              }
-              else{
-                 dom.removeClass('linkable')
-                 window.status = ''
-              }
-            }else if ($.inArray(nearest.node.name, ['arbor.js','code','docs','demos']) >=0 ){
-              if (nearest.node.name!=_section){
-                _section = nearest.node.name
-                that.switchSection(_section)
-              }
-              dom.removeClass('linkable')
-              window.status = ''
-            }
+            // if (nearest.node.data.shape!='dot'){
+            //   selected = (nearest.distance < 50) ? nearest : null
+            //   if (selected){
+            //      dom.addClass('linkable')
+            //      window.status = selected.node.data.link.replace(/^\//,"http://"+window.location.host+"/").replace(/^#/,'')
+            //   }
+            //   else{
+            //      dom.removeClass('linkable')
+            //      window.status = ''
+            //   }
+            //}else 
+            // if ($.inArray(nearest.node.name, ['Innovation','pushes humanity forward','is everywhere','needs action']) >=0 ){
+            //   if (nearest.node.name!=_section){
+            //     _section = nearest.node.name
+            //     that.switchSection(_section)
+            //   }
+            //   dom.removeClass('linkable')
+            //   window.status = ''
+            // }
             
             return false
           },
@@ -316,7 +317,7 @@
           break
           
           case 'introduction':
-          case 'reference':
+          case 'without warning':
           $(that).trigger({type:'mode', mode:'hidden', dt:dt})
           dom.find('> p').text(_path)
           dom.find('> a').addClass('active').attr('href','#')
@@ -334,53 +335,226 @@
   }
   
   $(document).ready(function(){
-    var CLR = {
-      branch:"#b2b19d",
-      code:"orange",
-      doc:"#922E00",
-      demo:"#a7af00"
+    var COLOR = {
+      main:"#C7F464",
+      second:"#FF6B6B",
+      third:"#C44D58",
+      fourth:"#556270",
+      fifth:"#4ECDC4"
     }
 
     var theUI = {
-      nodes:{"arbor.js":{color:"red", shape:"dot", alpha:1}, 
+      nodes:{"Innovation":{color:COLOR.fifth, shape:"dot", mass:5, fixed: true, alpha:1}, 
       
-             demos:{color:CLR.branch, shape:"dot", alpha:1}, 
-             halfviz:{color:CLR.demo, alpha:0, link:'/halfviz'},
-             atlas:{color:CLR.demo, alpha:0, link:'/atlas'},
-             echolalia:{color:CLR.demo, alpha:0, link:'/echolalia'},
+             "is everywhere":{color:COLOR.main, shape:"dot", alpha:1}, 
+                "clothes":{color:COLOR.fourth, alpha:1, link:''},
+                "pens":{color:COLOR.fourth, alpha:1, link:''},
+                "phones":{color:COLOR.fourth, alpha:1, link:''},
+                "glasses":{color:COLOR.fourth, alpha:1, link:''},
 
-             docs:{color:CLR.branch, shape:"dot", alpha:1}, 
-             reference:{color:CLR.doc, alpha:0, link:'#reference'},
-             introduction:{color:CLR.doc, alpha:0, link:'#introduction'},
+            "is the source to solve all problems":{color:COLOR.second},
+            "and to find new ones":{color:COLOR.third},
 
-             code:{color:CLR.branch, shape:"dot", alpha:1},
-             github:{color:CLR.code, alpha:0, link:'https://github.com/samizdatco/arbor'},
-             ".zip":{color:CLR.code, alpha:0, link:'/js/dist/arbor-v0.92.zip'},
-             ".tar.gz":{color:CLR.code, alpha:0, link:'/js/dist/arbor-v0.92.tar.gz'}
+            "problems make innovation":{color:COLOR.second},
+            "tsunamis":{color:COLOR.fourth},
+            "scary and inescapable at first":{color:COLOR.third},
+            "force to improve or start from scratch":{color:COLOR.third},
+            "build things in new dimensions":{color:COLOR.second},
+
+
+
+
+
+
+            "builds upon innovation":{color:COLOR.second},
+            "making things incrementally better":{color:COLOR.third},
+            "until they're something completely different":{color:COLOR.third},
+
+            "innovators stand on the shoulders of innovators":{color:COLOR.third},
+             "pushes humanity forward":{color:COLOR.main, shape:"dot", alpha:1},
+             "steadily fabricates our world":{color:COLOR.second, alpha:1},
+             "the world is a LEGO playground":{color:COLOR.second},
+              "an idea is the beginning of taking humans to the moon":{color:COLOR.second, alpha:1},
+
+
+              "mathematical equation":{color:COLOR.fourth},
+              "launching rockets to space":{color:COLOR.fourth},
+
+              "boolean logic":{color:COLOR.fourth},
+              "computers":{color:COLOR.fourth},
+              "artificial intelligence":{color:COLOR.fourth},
+              "computer games":{color:COLOR.fourth},
+              "imagined worlds":{color:COLOR.fourth},
+
+
+              "something in a person's mind can be suddenly on his hands":{color:COLOR.second},
+              "building the world is transforming thoughts into reality":{color:COLOR.third},
+
+
+
+
+              "everything is":{color:COLOR.second},
+              "ideas are all it takes to start":{color:COLOR.second, alpha:1},
+              "building":{color:COLOR.fourth, alpha:1},
+              "creating":{color:COLOR.fourth, alpha:1},
+              "transforming":{color:COLOR.fourth, alpha:1},
+              "redefining":{color:COLOR.fourth, alpha:1},
+              "our universe":{color:COLOR.third, alpha:1},
+
+
+             "needs action":{color:COLOR.main, shape:"dot", alpha:1},
+             "nothing has ever happened without":{color:COLOR.second},
+             "doing":{color:COLOR.fourth},
+             "execution":{color:COLOR.fourth},
+             "exertion":{color:COLOR.fourth},
+             "some force":{color:COLOR.fourth},
+
+             "infinite ways to innovate and even more things to innovate":{color:COLOR.third, alpha:1, link:''},
+
+             "arises while":{color:COLOR.third, alpha:1, link:''},
+                "brainstorming":{color:COLOR.fourth, alpha:1, link:''},
+                "discussing":{color:COLOR.fourth, alpha:1, link:''},
+                "fighting":{color:COLOR.fourth, alpha:1, link:''},
+                "complimenting":{color:COLOR.fourth, alpha:1, link:''},
+                "taking a shower":{color:COLOR.fourth, alpha:1, link:''},
+
+             "without warning":{color:COLOR.second, alpha:1}, 
+             "is this arrangement of words":{color:COLOR.third, alpha:1}
             },
       edges:{
-        "arbor.js":{
-          demos:{length:.8},
-          docs:{length:.8},
-          code:{length:.8}
+        "Innovation":{
+          "is everywhere":{length:.8},
+          "pushes humanity forward":{length:.8},
+          "needs action":{length:.8},
+
+          "is the source to solve all problems":{},
+          "builds upon innovation":{}
         },
-        demos:{halfviz:{},
-               atlas:{},
-               echolalia:{}
+
+        "builds upon innovation":{
+          "making things incrementally better":{},
+          "innovators stand on the shoulders of innovators":{},
+           "boolean logic":{},
+           "mathematical equation":{}
         },
-        docs:{reference:{},
-              introduction:{}
+        "problems make innovation":{
+          "and to find new ones":{},
+          "tsunamis":{}
         },
-        code:{".zip":{},
-              ".tar.gz":{},
-              "github":{}
+        "scary and inescapable at first":{
+            "tsunamis":{},
+            "problems make innovation":{},
+            "force to improve or start from scratch":{}
+          },
+
+          "force to improve or start from scratch":{
+            "build things in new dimensions":{},
+            "tsunamis":{}
+          },
+          "build things in new dimensions":{
+            "the world is a LEGO playground":{}
+          },
+
+
+
+          "boolean logic":{"computers":{}},
+          "computers":{"artificial intelligence":{}},
+          "artificial intelligence":{"computer games":{}},
+          "computer games":{"imagined worlds":{}},
+          "imagined worlds":{"the world is a LEGO playground":{}},
+
+
+          "mathematical equation":{"launching rockets to space":{}},
+          "launching rockets to space":{
+            "an idea is the beginning of taking humans to the moon":{}},
+
+
+          "making things incrementally better":{
+            "until they're something completely different":{},
+            "steadily fabricates our world":{}
+          },
+
+        "is everywhere":{
+               "without warning":{},
+               "infinite ways to innovate and even more things to innovate":{},
+               "arises while":{},
+               "pens":{},
+               "clothes":{},
+               "phones":{},
+               "glasses":{},
+               "is the source to solve all problems":{},
+               "builds upon innovation":{}
+        }, "is the source to solve all problems":{
+                "and to find new ones":{} 
+            },
+          "steadily fabricates our world":{
+              "Innovation":{},
+              "the world is a LEGO playground":{}
+          },
+        "arises while":{
+                "Innovation":{},
+               "brainstorming":{},
+               "discussing":{},
+               "fighting":{},
+              "complimenting":{},
+               "taking a shower":{}
+        },
+        "without warning":{
+              "is this arrangement of words":{}
+        },
+        "building the world is transforming thoughts into reality":{
+        "the world is a LEGO playground":{},
+        "steadily fabricates our world":{}
+        },
+        "needs action":{
+          "nothing has ever happened without":{},
+          "something in a person's mind can be suddenly on his hands":{}
+        },
+        "something in a person's mind can be suddenly on his hands":{
+          "building the world is transforming thoughts into reality":{}
+        },
+        "nothing has ever happened without":{
+           "doing":{color:COLOR.fourth},
+             "execution":{color:COLOR.fourth},
+             "exertion":{color:COLOR.fourth},
+             "some force":{color:COLOR.fourth},
+        },
+
+        "pushes humanity forward":{
+              "an idea is the beginning of taking humans to the moon":{},
+              "ideas are all it takes to start":{},
+              "the world is a LEGO playground":{}
+        },
+        "infinite ways to innovate and even more things to innovate":{
+          "redefining":{length:1.8}
+        },
+        "ideas are all it takes to start":{
+          "building":{},
+          "creating":{},
+          "transforming":{},
+          "redefining":{}
+        },
+        "everything is":{
+          "building":{},
+          "creating":{},
+          "transforming":{},
+          "redefining":{}
+        },
+        "our universe":{
+          "building":{},
+          "creating":{},
+          "transforming":{},
+          "redefining":{}
+        },
+        "is this arrangement of words":{
+              "Innovation":{}
         }
       }
     }
 
 
     var sys = arbor.ParticleSystem()
-    sys.parameters({stiffness:900, repulsion:2000, gravity:true, dt:0.015})
+    sys.parameters({stiffness:1000, repulsion:300, gravity:false, dt:0.015})
     sys.renderer = Renderer("#sitemap")
     sys.graft(theUI)
     
