@@ -554,7 +554,7 @@
 
 
     var sys = arbor.ParticleSystem()
-    sys.parameters({stiffness:1000, repulsion:300, gravity:false, dt:0.015})
+    sys.parameters({stiffness:0, repulsion:300, gravity:false, dt:0.005})
     sys.renderer = Renderer("#sitemap")
     sys.graft(theUI)
     
